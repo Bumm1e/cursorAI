@@ -453,20 +453,28 @@
 
         .dra-card-media {
             position: relative;
-            aspect-ratio: 4 / 3;
+            aspect-ratio: 1 / 1;
             overflow: hidden;
-            background: var(--color-bg);
+            /* soft luxury backdrop so transparent/white bottle shots sit cleanly */
+            background:
+                radial-gradient(120% 90% at 50% 12%, var(--color-accent-soft) 0%, transparent 60%),
+                linear-gradient(180deg, var(--color-surface) 0%, var(--color-bg) 100%);
+            display: grid;
+            place-items: center;
         }
 
         .dra-card-media img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            width: auto;
+            max-width: 80%;
+            height: 88%;
+            object-fit: contain;
+            /* gentle shadow grounds the floating bottle product shot */
+            filter: drop-shadow(0 14px 22px rgba(20, 50, 74, 0.16));
             transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .dra-card:hover .dra-card-media img {
-            transform: scale(1.06);
+            transform: translateY(-4px) scale(1.05);
         }
 
         .dra-card-no {
@@ -1408,13 +1416,27 @@
        Index 0..5 corresponds to products 1..6.
        Static fields shared across languages: volume, image, icon.
        ============================================================= */
+    /* Product bottle shots hosted on Blogger (transparent/white background).
+       Order strictly matches products 1..6 below. */
     var PRODUCT_STATIC = [
-        { vol: "50ml / 1.69 fl.oz.", icon: "fa-sun",            img: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=600&q=80" },
-        { vol: "15ml / 0.50 fl.oz.", icon: "fa-spray-can-sparkles", img: "https://images.unsplash.com/photo-1631730486784-697d5b69d9d4?auto=format&fit=crop&w=600&q=80" },
-        { vol: "30ml / 1.01 fl.oz.", icon: "fa-hand-sparkles",  img: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=600&q=80" },
-        { vol: "30ml / 1.01 fl.oz.", icon: "fa-seedling",       img: "https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&w=600&q=80" },
-        { vol: "10ml / 0.33 fl.oz.", icon: "fa-kiss-wink-heart", img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=600&q=80" },
-        { vol: "30ml / 1.01 fl.oz.", icon: "fa-circle-half-stroke", img: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=600&q=80" }
+        /* 1. PDRN Calming Sun Serum 50ml */
+        { vol: "50ml / 1.69 fl.oz.", icon: "fa-sun",
+          img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgvZ2ebIq30Hg24nMsJW5LFqVTQx76Bjmj1bb_0wb4pXlB6wickIqRu85KgYYjVGPqDN7TpfT4-oWvm5YahjIsjH5Q9cz4_wKlzjcs-X95qF7b2BPK5-YHiIK-QJ9qVEyfVgPG7waXHuv2B3uX_oUyHbQ5YCMbta0mbK7E6j_7qRaxU8K06T3Pas54RYGk/s320/sunserum.png" },
+        /* 2. PDRN Hair Density Scalp Serum 15ml */
+        { vol: "15ml / 0.50 fl.oz.", icon: "fa-spray-can-sparkles",
+          img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjZs6CDBDql4LIKUzfmqLvdudDq1DPXvNXs085NpY2ENwEWgtoatRSEQUwRrhcML3YbCePwzIs61ejpcNvhVjv4OXjnYMfR9HpuwOHG-DNz5Nrv67gbAoNiG7ThnVkfnGrAh_Z7NeYXOSS-Ted3Rn1JylqtBp54oS4HWzURlalA2I2upiUR6LYLrft7zJ0/s320/scalp.png" },
+        /* 3. PDLLA Firming Cream 30ml */
+        { vol: "30ml / 1.01 fl.oz.", icon: "fa-hand-sparkles",
+          img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhWNUpts3N6XvD8y9PYoeoi9BQPQ6on29V0ipo-xMe0-258B-tdGNBEUAm8eJ-u6_CHlI8REomoqoUaNSZIvvoO5Q4Z8b7w2A9GSAkNNxwkFDVx_L8dD7J6mBXkdEDAKGa861hNQwbbPiasn5U53-z-XViow3be9hV4wzqvRhCDIJKyly_a0TFueoLYX2I/s320/pdlla.png" },
+        /* 4. PDRN Rejuvenating Cream 30ml */
+        { vol: "30ml / 1.01 fl.oz.", icon: "fa-seedling",
+          img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg2U_pwK0V5ZivUcqqD_8W-huxo8Q7KpvD9OeJ4A1J8DrlSgHbJ83Al6aGYnsaQFntLEQutgE86DzTpnhPTT-hUxGLs_lXCXdILj9K0R24uyGDJ1eBQ2wqacMCvxOchlEC1LftcI-YNtfJiR1F81G-a4MDwB50wEkrv-XnrmgqLzXvKk2ZvwFZ32zM6ONk/s320/pdrn.png" },
+        /* 5. PDRN Rejuvenating Lip Serum 10ml */
+        { vol: "10ml / 0.33 fl.oz.", icon: "fa-kiss-wink-heart",
+          img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj1W-N6vT3nyrelTUitEURmxFHOCYYWJlyRVs6ObGJEAIKg2kf_o6kUqsSUtyA11B2nkWatcSnutYfWVP-NPWowc6cJawG8533nOSy1V6oDaJsp8nYl-sEXrOq3MVR0ZGErFktDFPlu8ULehYhW2r2stn8LNjW93cDBYqDltemC-oLnV2yTYahrii55tZk/s320/ripserum.png" },
+        /* 6. Retino-Mela Tone Cream 30ml */
+        { vol: "30ml / 1.01 fl.oz.", icon: "fa-circle-half-stroke",
+          img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi2DBzcAbFCpYvQeUneHTIwOL-8t-eH92BRTUIN_YTkihuhaO2ywGKtn0ACKWregE-vFJywkfz9pSynYp0PuixkC-ITOPw3g-wbRpHFUAzxvm0A825otpRetFw4bD-CvRAYd7qMcSIw_Pc42aE05pvWKZGC6wyd6M_Rt_7SawqrTvw9piRDwx83mBIinHs/s320/retino.png" }
     ];
 
     var PRODUCTS = {
